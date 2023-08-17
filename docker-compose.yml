@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  prometheus:
+    image: "local/prometheus_for_prometheus_sandbox:0.0.1"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./dockerfiles/prometheus_for_prometheus_sandbox/files/home/prometheus:/home/prometheus
+  server_1:
+    image: "local/server_for_prometheus_sandbox:0.0.1"
+    volumes:
+      - ./dockerfiles/server_for_prometheus_sandbox/files/home/exporter:/home/exporter
+    depends_on:
+      - prometheus
